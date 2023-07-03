@@ -8,12 +8,19 @@
 </head>
 <body>
 <script src="https://d3js.org/d3.v4.min.js"></script>
-
-<h1>Conflicts of the World (1816 - 2014)</1>
+<div>
+  <h1>Conflicts of the World (1816 - 2014)</h1>
+  <div>
+    <div id="edgeBundlingContainer" class="element"></div>
+    <div id="detailViewContainer" class="element">
+      <h2>Argentinia</h2>
+    </div>
+  </div>
+</div>
  
 <script>
 
-// Size Diagram 
+// Size Diagramm
 var diameter = 900,
     radius = diameter / 2,
     innerRadius = radius - 120;
@@ -29,7 +36,7 @@ var line = d3.radialLine()
     
 // Window size dependend on Diagram size
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#edgeBundlingContainer").append("svg")
     .attr("width", diameter)
     .attr("height", diameter)
     .append("g")
@@ -108,9 +115,6 @@ const csvFile = 'MIDB.csv';
 
 // Open additional information about the selected country
 function mouseclicked(d) {
-
-  console.log(d.data.STABB);
-
   var searchValue = d.data.STABB
 
 // Read the CSV file and filter the lines
@@ -122,10 +126,13 @@ d3.csv(csvFile, (data) => {
 
   // Do something with the filtered data
   console.log(filteredData);
-});
+
+  var detailContainer = d3.select("#detailViewContainer");
 
 
-}
+  });
+
+};
 
 
 // Lazily construct the package hierarchy from class names.
@@ -172,8 +179,6 @@ function packageImports(nodes) {
 
   return imports;
 }
-
-
 
 </script>
 </body>
