@@ -24,6 +24,14 @@ h2 {
 
 }
 
+h3 {
+
+  padding-left: 2%;
+  font: 300 18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+}
+
 .element {
 
   display: inline-block;
@@ -98,7 +106,7 @@ h2 {
       margin-right: 1%;
       height: 800px;
       width: 40%;
-
+      border-style: solid; 
 
     }; 
 

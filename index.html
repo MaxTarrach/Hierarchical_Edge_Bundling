@@ -13,7 +13,8 @@
   <div>
     <div id="edgeBundlingContainer" class="element"></div>
     <div id="detailViewContainer" class="element">
-      <h2>Argentinia</h2>
+      <h2 id="countryName">Argentinia</h2>
+      <h3 id="countryConflicts">Total Conflicts: </h3>
     </div>
   </div>
 </div>
@@ -128,6 +129,29 @@ d3.csv(csvFile, (data) => {
   console.log(filteredData);
 
   var detailContainer = d3.select("#detailViewContainer");
+
+  // Header 
+  var heading = document.getElementById('countryName'); 
+
+  let index = d.data.name.lastIndexOf('.');
+  let str = d.data.name.substring(index+1)
+  heading.textContent = str;
+
+
+  // Total conflicts: 
+  var conflictCount = document.getElementById('countryConflicts');
+
+  var numberConflicts = filteredData.length;
+  console.log(numberConflicts);
+  conflictCount.textContent = "Total Conflicts:" + numberConflicts; 
+
+
+
+
+  // Kurvendiagram: Wann gabe es wie viele Konflikte?
+
+
+  // Art des Konflikts: Pie Chart
 
 
   });
