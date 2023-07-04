@@ -15,6 +15,9 @@
     <div id="detailViewContainer" class="element">
       <h2 id="countryName">Argentinia</h2>
       <h3 id="countryConflicts">Total Conflicts: </h3>
+      <div id="originChart"> </div>
+      <div id="hostChart"> </div>
+      <div id="timeChart"></div>
     </div>
   </div>
 </div>
@@ -85,6 +88,72 @@ d3.json("modified_final_data.json", function(error, classes) {
 
 
 
+// create 2 data_set
+var data1 = [
+   {group: "no militarized action", value: 62},
+   {group: "threat to use force", value: 24},
+   {group: "display of force", value: 143},
+   {group: "use of force", value: 103},
+   {group: "war", value: 10}
+];
+
+
+// set the dimensions and margins of the graph
+var margin = {top: 30, right: 30, bottom: 70, left: 60},
+    width = 500 - margin.left - margin.right,
+    height = 320 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#hostChart")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+// X axis
+var x = d3.scaleBand()
+  .range([ 0, width ])
+  .domain(data1.map(function(d) { return d.group; }))
+  .padding(0.2);
+svg.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x))
+
+// Add Y axis
+var y = d3.scaleLinear()
+  .domain([0, 200])
+  .range([ height, 0]);
+svg.append("g")
+  .attr("class", "myYaxis")
+  .call(d3.axisLeft(y));
+
+// A function that create / update the plot for a given variable:
+function update(data) {
+
+var u = svg.selectAll("rect")
+  .data(data)
+
+u
+  .enter()
+  .append("rect")
+  .merge(u)
+  .transition()
+  .duration(1000)
+    .attr("x", function(d) { return x(d.group); })
+    .attr("y", function(d) { return y(d.value); })
+    .attr("width", x.bandwidth())
+    .attr("height", function(d) { return height - y(d.value); })
+    .attr("fill", "#69b3a2")
+}
+
+
+update(data1)
+
+
+
+
 // Mouse over Interaction add Click Interaction later
 
 function mouseovered(d) {
@@ -116,10 +185,12 @@ const csvFile = 'MIDB.csv';
 
 // Open additional information about the selected country
 function mouseclicked(d) {
+
   var searchValue = d.data.STABB
 
 // Read the CSV file and filter the lines
 d3.csv(csvFile, (data) => {
+
   var filteredData = data.filter(d => {
     // Modify this condition based on your specific requirements
     return Object.values(d).some(value => value.includes(searchValue));
@@ -143,16 +214,107 @@ d3.csv(csvFile, (data) => {
 
   var numberConflicts = filteredData.length;
   console.log(numberConflicts);
-  conflictCount.textContent = "Total Conflicts:" + numberConflicts; 
+  conflictCount.textContent = "Total Conflicts: " + numberConflicts; 
 
 
+  // Art des Konflikts: Bar Chart
+  // create a javascript object with group and value element
+  console.log(filteredData[0].hostlev)
 
+
+  var hostValues = [1,2,3,4,5]; 
+  var hostpercountry = []; 
+
+  for (i = 0; i < filteredData.length; i++){
+
+    var level = filteredData[i].hostlev; 
+
+    hostpercountry.push(level);
+
+  }
+
+
+  function countElements(arr) {
+  var counts = {};
+
+  for (let i = 0; i < arr.length; i++) {
+    var element = arr[i];
+    if (counts[element]) {
+      counts[element] += 1;
+    } else {
+      counts[element] = 1;
+    }
+  }
+
+  return counts;
+}
+
+var elementCounts = countElements(hostpercountry);
+console.log(elementCounts);
+
+console.log(elementCounts[2])
+
+
+/*
+var data1 = [
+   {group: "no militarized action", value: 4},
+   {group: "threat to use force", value: 16},
+   {group: "display of force", value: 8},
+   {group: "use of force", value: 4},
+   {group: "war", value: 2}
+];
+  
+*/
+
+if (typeof elementCounts[1] === 'undefined') {
+
+  elementCounts[1] = 0; 
+
+}
+
+if (typeof elementCounts[2] === 'undefined') {
+
+elementCounts[2] = 0; 
+
+}
+
+if (typeof elementCounts[3] === 'undefined') {
+
+elementCounts[3] = 0; 
+
+}
+
+if (typeof elementCounts[4] === 'undefined') {
+
+elementCounts[4] = 0; 
+
+}
+
+if (typeof elementCounts[5] === 'undefined') {
+
+elementCounts[5] = 0; 
+
+}
+
+var data2 = [
+   {group: "no militarized action", value: elementCounts[1]},
+   {group: "threat to use force", value: elementCounts[2]},
+   {group: "display of force", value: elementCounts[3]},
+   {group: "use of force", value: elementCounts[4]},
+   {group: "war", value: elementCounts[5]}
+];
+
+console.log(data2); 
+
+update(data2); 
+
+  // update function update(data)
+
+
+  // Originator of dispute?
+ 
 
   // Kurvendiagram: Wann gabe es wie viele Konflikte?
-
-
-  // Art des Konflikts: Pie Chart
-
 
   });
 
