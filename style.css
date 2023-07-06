@@ -6,12 +6,12 @@ body {
 
 h1 {
   width: 100%;
-  padding-left: 70%;
-  font: 300 30px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-left: 67%;
+  font: 300 56px "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #bbb;
   position: absolute;
   top: 0;
-  left: 50%;
+  left: 70%;
   transform: translateX(-50%);
   z-index: 9999;
 
@@ -20,7 +20,7 @@ h1 {
 h2 {
 
   padding-left: 5%;
-  font: 300 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 300 30px "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   color: #bbb; 
 
@@ -28,9 +28,15 @@ h2 {
 
 h3 {
 
-  padding-left: 5%;
   font: 300 18px "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #bbb;
+
+}
+
+p {
+
+  font: 300 28px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #16FFBD;
 
 }
 
@@ -41,20 +47,6 @@ h3 {
   height: 800px;
 
 }
-
-.container {
-
-  display: flex;
-  width: 100%;
-
-}
-
-  .box {
-    width: 50%;
-    height: 200px;
-    background-color: #f0f0f0;
-  }
-
 
   .node {
       font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -136,17 +128,37 @@ h3 {
 
     }
 
+    .box{
 
+      width: 220px;
+      height: 140px;
+      background-color: #070D0D;
+      border: 1px solid black;
+      margin: 5%;
+      text-align: center;
+      border-radius: 15px;
+      display: inline-block;
+       
+
+      }
+
+
+    #background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+
+    }
 
 
     #detailViewContainer {
 
-      margin-top: 4%;
+      margin-top: 6%;
       position: fixed; 
       right: 0;
-      margin-right: 1%;
-      height: 800px;
-      width: 40%;
+      margin-right: 2%;
+      height: auto;
+      width: auto;
       border-radius: 25px;
       border-style: solid; 
       background-color: #1A1A1D;
@@ -164,4 +176,11 @@ h3 {
 
     }; 
     
-    
+    #block_container {
+
+      width: auto; 
+      height: auto;  
+
+
+    }; 
+

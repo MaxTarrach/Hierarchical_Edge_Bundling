@@ -8,18 +8,41 @@
 </head>
 <body>
 <script src="https://d3js.org/d3.v4.min.js"></script>
-<div>
+<!-- Color scale -->
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+<div id ="background">
   <h1>Conflicts of the World (1816 - 2014)</h1>
-  <div>
+
     <div id="edgeBundlingContainer" class="element"></div>
+
+
     <div id="detailViewContainer" class="element">
+
       <h2 id="countryName">USA</h2>
-      <h3 id="countryConflicts">Total Conflicts: </h3>
-      <div id="originChart"> </div>
+
+      <div id="block_container">
+        <div id="box1" class="box">
+          <p id="conflictCount">342</p>
+          <h3 id="countryConflicts">Total Conflicts</h3>
+        </div>
+        <div id="box2" class="box">
+          <p id="originCount">281</p>
+          <h3 id="countryConflicts">Origin of conflict</h3>
+        </div>
+      </div>        
+        
+
+        <div id="conflict-box">
+          
+          
+        </div>
+
+
+
       <div id="hostChart"> </div>
-      <div id="timeChart"></div>
     </div>
-  </div>
+
 </div>
  
 <script>
@@ -86,8 +109,6 @@ d3.json("modified_final_data.json", function(error, classes) {
 });
 
 
-
-
 // create 2 data_set
 var data1 = [
    {group: "No militarized action", value: 62},
@@ -97,10 +118,13 @@ var data1 = [
    {group: "War", value: 10}
 ];
 
+    // Create dummy data
+    var data_pie = {a: 9, b: 20}
+
 
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 30, bottom: 70, left: 60},
-    width = 500 - margin.left - margin.right,
+    width = 600 - margin.left - margin.right,
     height = 320 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
@@ -151,55 +175,6 @@ u
 
 
 update(data1)
-/*
-// create a pie chart with the fact if they started the conflict
-
-
-// set the dimensions and margins of the graph
-var width_pie = 200
-    height_pie = 200
-    margin_pie = 50
-
-// The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-var radius = Math.min(width_pie, height_pie) / 2 - margin_pie
-
-// append the svg object to the div called 'my_dataviz'
-var svg = d3.select("#originChart")
-  .append("svg")
-    .attr("width", width_pie)
-    .attr("height", height_pie)
-  .append("g")
-    .attr("transform", "translate(" + width_pie / 2 + "," + height_pie / 2 + ")");
-
-// Create dummy data
-var data_pie = {a: 9, b: 20}
-
-// set the color scale
-var color = d3.scaleOrdinal()
-  .domain(data_pie)
-  .range(["#98abc5", "#8a89a6"])
-
-// Compute the position of each group on the pie:
-var pie = d3.pie()
-  .value(function(d) {return d.value; })
-var data_ready = pie(d3.entries(data_pie))
-
-// Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-svg
-  .selectAll('whatever')
-  .data(data_ready)
-  .enter()
-  .append('path')
-  .attr('d', d3.arc()
-    .innerRadius(100)         // This is the size of the donut hole
-    .outerRadius(radius)
-  )
-  .attr('fill', function(d){ return(color(d.data_pie.key)) })
-  .attr("stroke", "black")
-  .style("stroke-width", "2px")
-  .style("opacity", 0.7)
-
-*/ 
 
 
 // Mouse over Interaction add Click Interaction later
@@ -258,11 +233,36 @@ d3.csv(csvFile, (data) => {
 
 
   // Total conflicts: 
-  var conflictCount = document.getElementById('countryConflicts');
+  var conflictCount = document.getElementById('conflictCount');
 
   var numberConflicts = filteredData.length;
   console.log(numberConflicts);
-  conflictCount.textContent = "Total Conflicts: " + numberConflicts; 
+
+  conflictCount.innerHTML = numberConflicts; 
+
+
+  var originatorCount = 0; 
+
+// Originator of dispute?
+
+for ( i = 0; i<filteredData.length; i++){
+
+  console.log(filteredData[i].orig)
+
+  if (filteredData[i].orig == 1) {
+
+    originatorCount++; 
+
+  }
+
+}
+
+
+  console.log(originatorCount)
+  
+  var orCount= document.getElementById('originCount');
+  orCount.innerHTML = originatorCount; 
+
 
 
   // Art des Konflikts: Bar Chart
@@ -359,14 +359,18 @@ update(data2);
   // update function update(data)
 
 
-  // Originator of dispute?
- 
 
-  // Kurvendiagram: Wann gabe es wie viele Konflikte?
+  }); 
 
-  });
+
+
+
+
+
 
 };
+
+
 
 
 // Lazily construct the package hierarchy from class names.
@@ -413,6 +417,9 @@ function packageImports(nodes) {
 
   return imports;
 }
+
+
+
 
 </script>
 </body>
