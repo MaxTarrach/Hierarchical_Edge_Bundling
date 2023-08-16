@@ -1,28 +1,24 @@
 body {
-
-  background-color: #070D0D;
-
+  background-color: #101a1a;
+  margin: 0; /* Reset default margin */
 }
 
 h1 {
-  width: 100%;
-  padding-left: 67%;
-  font: 300 56px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #bbb;
-  position: absolute;
-  top: 0;
-  left: 70%;
-  transform: translateX(-50%);
+  text-align: left;
+  margin-left: 60px;
+  font-family: 'Inter', sans-serif;
+  font-size: 64px;
+  color: #b5b5b5;
   z-index: 9999;
 
 }
 
 h2 {
 
-  padding-left: 5%;
-  font: 300 30px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Inconsolata', monospace;
+  font-size: 26px;
   font-weight: bold;
-  color: #bbb; 
+  color: #DDDDDD; 
 
 }
 
@@ -35,26 +31,17 @@ h3 {
 
 p {
 
-  font: 300 28px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #16FFBD;
+  font: 300 26px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #DDDDDD;
 
 }
-
-.element {
-
-  display: inline-block;
-  width: 50%;
-  height: 800px;
-
-}
-
   .node {
       font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
-      fill: #bbb;
+      fill: #9d9d9d;
     }
     
     .node:hover {
-      fill: #C34271;
+      fill: #AAAA00;
     }
     
     .link {
@@ -71,25 +58,27 @@ p {
     }
     
     .node--source {
-      fill: #16FFBD;
+      fill: #DDDDDD;
+      text-decoration: underline;
     }
   
     .node--target {
-      fill: #16FFBD;
+      fill: #DDDDDD;
+      text-decoration: underline;
     }
     
     .link--source,
     .link--target {
-      stroke-opacity: 1;
-      stroke-width: 2px;
+      stroke-opacity: 0.7;
+      stroke-width: 1px;
     }
     
     .link--source {
-      stroke: #16FFBD;
+      stroke: #DDDDDD;
     }
     
     .link--target {
-      stroke: #16FFBD;
+      stroke: #DDDDDD;
     }
 
     .myYaxis path{
@@ -128,59 +117,65 @@ p {
 
     }
 
-    .box{
-
-      width: 220px;
-      height: 140px;
-      background-color: #070D0D;
-      border: 1px solid black;
-      margin: 5%;
-      text-align: center;
-      border-radius: 15px;
-      display: inline-block;
-       
-
-      }
-
-
     #background {
       position: absolute;
       width: 100%;
       height: 100%;
-
     }
 
+    #flex-container {
 
-    #detailViewContainer {
+      display: flex;
+      align-items: flex-start;
+      padding: 20px;
+    }
 
-      margin-top: 6%;
-      position: fixed; 
-      right: 0;
-      margin-right: 2%;
-      height: auto;
-      width: auto;
-      border-radius: 25px;
-      border-style: solid; 
-      background-color: #1A1A1D;
+    #description {
 
-    }; 
+      flex: 1; /* Let it take one-third of the space */
+      margin-top: 0px;
+      margin-left: 40px;
+      padding-right: 20px;
+      line-height: 2;
+      color: #b5b5b5;
+      font-family: 'Inconsolata', monospace;
+      font-weight: regular;
+    }
 
     #edgeBundlingContainer {
+          flex: 2; /* Let it take two-thirds of the space */
+    }
 
-      margin-top: 4%;
-      position: fixed; 
-      left:0;
-      height: 800px;
-      width: 50%;
-      background-color: red; 
+    #tooltip {
+      display: none;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
 
-    }; 
+      border-left: 8px solid red;
+      }
+
+    .main-heading {
+      font-size: 18px;
+      margin: 0 0 10px 0;
+    }
     
-    #block_container {
-
-      width: auto; 
-      height: auto;  
-
-
-    }; 
-
+    .quadrant {
+      width: 50%;
+      float: left;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    
+    .heading {
+      font-size: 16px;
+      margin: 0;
+    }
+    
+    .value {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+    }
